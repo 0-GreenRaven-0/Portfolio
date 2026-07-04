@@ -984,6 +984,17 @@ html {
   transform: translateY(0);
 }
 
+.portfolio-project-coming-soon {
+  opacity: 0.4 !important;
+  cursor: default !important;
+  font-style: italic;
+  &:hover {
+    border-color: rgba(42, 174, 5, 0.3) !important;
+    color: inherit !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+  }
+}
+
 /* showcase layout for landing/sales pages */
 .portfolio-showcase-grid {
   display: grid;

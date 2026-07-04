@@ -361,19 +361,36 @@ import { Icon } from "astro-icon/components";
   type ListItem = { name: string; href: string };
 
   const listData: Record<string, ListItem[]> = {
-    'copywriting':     [{ name: 'Portfolio Piece Title', href: '#' }, { name: 'Portfolio Piece Title', href: '#' }],
-    'scriptwriting':   [{ name: 'Portfolio Piece Title', href: '#' }, { name: 'Portfolio Piece Title', href: '#' }],
-    'webpages':        [{ name: 'Portfolio Piece Title', href: '#' }, { name: 'Portfolio Piece Title', href: '#' }],
-    'funnel-creation': [{ name: 'Portfolio Piece Title', href: '#' }, { name: 'Portfolio Piece Title', href: '#' }],
-    'email-marketing': [{ name: 'Portfolio Piece Title', href: '#' }, { name: 'Portfolio Piece Title', href: '#' }],
+    'landing-page':    [{ name: 'Droparabia Landing Page', href: 'https://join.droparabia.com/start' }],
+    'copywriting':     [{ name: 'Will be added soon...', href: '#' }],
+    'scriptwriting':   [{ name: 'Will be added soon...', href: '#' }],
+    'webpages':        [{ name: 'Will be added soon...', href: '#' }],
+    'funnel-creation': [{ name: 'Will be added soon...', href: '#' }],
+    'email-marketing': [
+      { name: 'Droparabia - Welcome', href: 'https://docs.google.com/document/d/1SbbBALudSa7dw6sym-iuWTz33QFeccrTZZtEcD3ZUH8/edit?usp=sharing' },
+      { name: 'Droparabia - Email 1', href: 'https://docs.google.com/document/d/1Vn3x7Le2cEDn7n33pQ19hG02f17rcrIMoYZhOlj3WmA/edit?usp=sharing' },
+      { name: 'Droparabia - Email 2', href: 'https://docs.google.com/document/d/1PPmN-Rt9BZEkOKTDG8tlPtJUHlslZ0qqkllB6S7jpi0/edit?usp=sharing' },
+      { name: 'Droparabia - Email 3', href: 'https://docs.google.com/document/d/1E77DT3RQiUelPREDPubJmpS7f9h2Sl4JdiKvsp0WQKg/edit?usp=sharing' },
+      { name: 'RSI - Email 1',        href: 'https://docs.google.com/document/d/1Rw0mG7uk4WB_WxtyNNC3uAEbj6hLlQLCAbSeaCp29qo/edit?usp=sharing' },
+      { name: 'RSI - Email 2',        href: 'https://docs.google.com/document/d/1hvH7EddiJnf5OAC5lotbTYa0DZG9VKDW-qgpxRu64Y4/edit?usp=sharing' },
+    ],
+    'webinar-funnel':  [{ name: 'Droparabia Webinar Registration Page', href: 'https://workshop.droparabia.com' }],
+    'sales-page':      [
+      { name: 'Droparabia Sales Page',                  href: 'https://join.droparabia.com' },
+      { name: 'Droparabia Instagram Funnel Sales Page', href: 'https://book.droparabia.com' },
+      { name: 'Samara Michael Workshop',                href: 'https://0-greenraven-0.github.io/SamaraMichaelsFBA/' },
+    ],
   };
 
   const titles: Record<string, string> = {
+    'landing-page':    'Landing Pages',
     'copywriting':     'Copywriting',
     'scriptwriting':   'Scriptwriting',
     'webpages':        'Webpages',
     'funnel-creation': 'Funnel Creation',
     'email-marketing': 'Email Marketing',
+    'sales-page':      'Sales Pages',
+    'webinar-funnel':  'Webinar Landing Pages',
   };
 
   const overlay = document.getElementById('portfolio-overlay')!;
@@ -386,10 +403,11 @@ import { Icon } from "astro-icon/components";
   function renderList(items: ListItem[]) {
     items.forEach(p => {
       const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = p.href;
+      const a = p.href === '#' ? document.createElement('span') : document.createElement('a');
+      if (a instanceof HTMLAnchorElement) a.href = p.href;
       a.textContent = p.name;
       a.classList.add('portfolio-project-item');
+      if (p.href === '#') a.classList.add('portfolio-project-coming-soon');
       a.style.opacity = '0';
       a.style.transform = 'translateY(8px)';
       li.appendChild(a);
