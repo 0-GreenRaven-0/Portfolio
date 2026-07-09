@@ -1,0 +1,17 @@
+---
+const PARTS = 50;
+const particles = Array.from({ length: PARTS }, (_, i) => ({
+  delay: (Math.random()).toFixed(3),
+  left: `calc((100% - 2.5em) * ${(i / PARTS).toFixed(4)})`,
+}));
+---
+
+<div class="torch-wrap">
+  <div class="fire-particles">
+    {particles.map(p => (
+      <div class="fire-particle" style={`animation-delay: ${p.delay}s; left: ${p.left};`}></div>
+    ))}
+  </div>
+  <div class="torch-head"></div>
+  <div class="torch-stick"></div>
+</div>

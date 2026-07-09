@@ -2,13 +2,28 @@
 import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
+import Torch from "../components/Torch.astro";
 ---
 
-<BaseLayout title="Your Name — Copywriter">
+<BaseLayout title="Matthew Hamdesh — Copywriter & Funnel Strategist">
 
   <!-- ─── HERO ─────────────────────────────────────────────────── -->
   <section id="hero" class="hero-section">
     <div class="stars-container" id="stars-container"></div>
+
+<!-- Rock Group Left -->
+    <div class="rock-group rock-group-left" aria-hidden="true">
+      <div class="hero-rock rock-a"></div>
+      <div class="hero-rock rock-b"></div>
+      <div class="hero-rock rock-c"></div>
+    </div>
+    <!-- Rock Group Right -->
+    <div class="rock-group rock-group-right" aria-hidden="true">
+      <div class="hero-rock rock-d"></div>
+      <div class="hero-rock rock-e"></div>
+      <div class="hero-rock rock-f"></div>
+    </div>
+
     <nav class="hero-nav">
       <button class="hamburger md:hidden" id="hamburger" aria-label="Menu">
         <span class="hamburger-line"></span>
@@ -42,11 +57,11 @@ import { Icon } from "astro-icon/components";
       <div class="who-triangle who-triangle-left"></div>
       <img src="/frame 1.png" alt="" class="who-wall-corner who-wall-tl" />
       <h2 class="who-wall-heading">Who Is This For?</h2>
-      <p class="who-wall-text who-wall-text-left">I help high-ticket sales coaches sell their mentorships to the people who want to build a better career path, time flexibility and slowly make their way towards financial freedom, through carefully and human crafted content and funnels.</p>
+      <p class="who-wall-text who-wall-text-left">I help high-ticket sales coaches and saas founders sell their offers to the people who want to build a better career, time flexibility and slowly make their way towards financial freedom, through carefully and human crafted content and funnels.</p>
     </div>
     <div class="who-wall-wrap who-wall-right">
       <div class="who-triangle who-triangle-right"></div>
-<p class="who-wall-text who-wall-text-right">Because if someone's out there who's going to understand the importance of humanely-crafted writing, it's the high-ticket sales coaches. After all, high-ticket coaching is all about providing guidance and legitimacy to someone before making a decision to buy.</p>
+<p class="who-wall-text who-wall-text-right">Because the kind of offer that's sole mission is to reshape someone's career path or impact their financial wellbeing is best to be demonstrated through human writing that will allow us to stand out from a market abusing AI generic writing.</p>
     </div>
   </section>
 
