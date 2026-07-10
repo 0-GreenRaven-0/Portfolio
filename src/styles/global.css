@@ -1531,13 +1531,99 @@ html {
   border-radius: 2px 2px 3px 3px;
 }
 
+/* ─── PORTAL ─────────────────────────────────────────────────── */
+
+@utility portal-wrap {
+  position: relative;
+  display: block;
+  width: min(260px, 60vw);
+  height: min(260px, 60vw);
+  margin: 3rem auto 0;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow:
+    0 0 40px rgba(42, 174, 5, 0.15),
+    0 0 80px rgba(42, 174, 5, 0.08);
+  transition: box-shadow 0.4s ease;
+  &:hover {
+    box-shadow:
+      0 0 60px rgba(42, 174, 5, 0.35),
+      0 0 120px rgba(42, 174, 5, 0.15);
+  }
+}
+
+#portal-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@utility portal-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-fell);
+  font-style: italic;
+  color: #fff;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  text-shadow: 0 0 24px rgba(255, 255, 255, 0.9), 0 0 48px rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+  letter-spacing: 0.05em;
+}
+
 /* ─── FOOTER ─────────────────────────────────────────────────── */
 
 @utility site-footer {
-  @apply relative py-10 px-6 text-center;
-  background: #0a2e0a;
+  @apply relative text-center overflow-hidden;
+  background: #000000;
+  padding: clamp(80px, 10vw, 130px) 2rem 2rem;
+}
+
+@utility footer-corner {
+  @apply absolute top-0 pointer-events-none;
+  width: clamp(100px, 14vw, 180px);
+  opacity: 0.9;
+}
+
+@utility footer-corner-left {
+  left: 0;
+}
+
+@utility footer-corner-right {
+  right: 0;
+  transform: scaleX(-1);
+}
+
+@utility footer-tagline {
+  @apply font-fell text-cream relative z-10;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-style: italic;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  text-shadow:
+    0 0 30px rgba(42, 174, 5, 0.25),
+    0 0 60px rgba(42, 174, 5, 0.1);
+}
+
+@utility footer-socials {
+  @apply flex items-center justify-center gap-6 relative z-10;
+  margin-bottom: 1.5rem;
+}
+
+@utility footer-social-link {
+  @apply text-cream/50 transition-colors duration-200;
+  &:hover { color: #2AAE05; }
+}
+
+@utility footer-social-icon {
+  width: 1.4rem;
+  height: 1.4rem;
 }
 
 @utility footer-text {
-  @apply font-fell text-cream/20 text-xs tracking-widest;
+  @apply font-fell text-cream/20 text-xs tracking-widest relative z-10;
 }
