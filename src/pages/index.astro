@@ -40,27 +40,37 @@ import Torch from "../components/Torch.astro";
     <div class="hero-content">
 
       <h1 class="hero-title">
-        Let my powerful words bestow<br />conversion &amp; trust upon your offer
+        Conjure high-converting systems into your empire
       </h1>
-      <p class="hero-subheadline">
-        And let my words revoke the accursed AI and its generic writing that repels your qualified customers<br />
-        <span class="font-fell text-cream/40 text-[0.75rem] tracking-normal normal-case">(No offense to the AI that helped me build this website...)</span>
-      </p>
-
 
     </div>
+
+    <div class="scroll-prompt" id="scroll-prompt" aria-hidden="true">
+      <span class="scroll-prompt-text">Begin thy scrolling, sire</span>
+      <svg class="scroll-prompt-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
   </section>
 
   <!-- ─── WHO IS THIS FOR ──────────────────────────────────────── -->
-  <section id="who" class="who-section-part2">
-    <div class="who-wall-wrap who-wall-left">
-      <div class="who-triangle who-triangle-left"></div>
-      <img src="/frame 1.png" alt="" class="who-wall-corner who-wall-tl" />
-      <p class="who-wall-text who-wall-text-left">I'm a copywriter and a funnel strategist who utilizes his own human instincts to write you persuasive &amp; captivating copy that perfectly resonates with your ideal audience. I mostly use AI for research and swift grammar fixes.</p>
-    </div>
-    <div class="who-wall-wrap who-wall-right">
-      <div class="who-triangle who-triangle-right"></div>
-<p class="who-wall-text who-wall-text-right">The reason I choose to write without relying on AI is because people nowadays can easily sniff out AI generic writing that makes them unsure if there's a real human behind your business and whether they should trust you.</p>
+  <section id="who" class="who-section">
+    <!-- brick wall background with clip-path (separate so ornament isn't clipped) -->
+    <div class="who-wall-bg" aria-hidden="true"></div>
+
+    <!-- top-left corner ornament -->
+    <img src="/frame 1.png" alt="" class="who-rune-tl" aria-hidden="true" />
+
+    <h2 class="who-heading">I'm not here to "write you emails"</h2>
+
+    <div class="who-grid">
+      <p class="who-cell-a">I'm a copywriter &amp; conversion strategist and I'm not here to hand you a few deliverables like emails or scripts and disappear. I am here to build you high-converting systems to help you generate more sales, save you time and help connect with your ideal audience so you can focus on the important aspects of your business.</p>
+      <!-- empty top-right cell -->
+      <span></span>
+      <!-- bottom-left: raven sigil -->
+      <img src="https://ik.imagekit.io/greenraven/Green%20Raven/Green%20Raven.png?updatedAt=1766511556233" alt="" class="who-sigil" id="who-sigil" aria-hidden="true" />
+      <p class="who-cell-b">While I leverage powerful and advanced tools like AI to reduce friction and produce high-quality work faster, AI never replaces my creative thinking and human instincts — as everything is still being written and double checked by me.</p>
     </div>
   </section>
 
@@ -71,34 +81,46 @@ import Torch from "../components/Torch.astro";
       <div class="carousel-track-wrap">
       <div id="tab-services" class="services-grid">
         <div class="service-card">
-          <div class="service-icon-wrap"><span class="service-icon-ring"></span><Icon name="lucide:pen-tool" class="service-icon" /></div>
-          <h3 class="service-card-title">Copywriting</h3>
-          <p class="service-card-text">I rely on my own writing and communication skills to write your copies from web pages, emails and scripts. I don't use AI in my copywriting unless if it's for research and fixing grammar.</p>
+          <div class="service-icon-wrap"><span class="service-icon-ring"></span><Icon name="lucide:crosshair" class="service-icon" /></div>
+          <div class="service-card-body">
+            <h3 class="service-card-title">Identifying ICP &amp; Strategy</h3>
+            <p class="service-card-text">Before I start building anything, I begin by creating the ICP (ideal customer profile), which is the main foundation that determines what strategy I need to implement, maps out all objections, and surfaces the different angles I can test.</p>
+          </div>
         </div>
         <div class="service-card">
-          <div class="service-icon-wrap"><span class="service-icon-ring"></span><Icon name="lucide:scroll-text" class="service-icon" /></div>
-          <h3 class="service-card-title">Scriptwriting</h3>
-          <p class="service-card-text">I script VSLs and social media content depending on your funnel's needs and the specific actions we want your audience to take.</p>
+          <div class="service-icon-wrap"><span class="service-icon-ring"></span><Icon name="lucide:megaphone" class="service-icon" /></div>
+          <div class="service-card-body">
+            <h3 class="service-card-title">Bringing In the Traffic</h3>
+            <p class="service-card-text">This is done through scripting scroll-stopping short form ads that catch the attention of cold prospects and bring them into my funnel to turn them into buying customers.</p>
+          </div>
         </div>
         <div class="service-card">
           <div class="service-icon-wrap"><span class="service-icon-ring"></span><Icon name="lucide:layout" class="service-icon" /></div>
-          <h3 class="service-card-title">Webpages</h3>
-          <p class="service-card-text">Besides the writing part, I'll handle building a fully functional, ready-to-use landing page or sales page and connected directly to Google Analytics for performance tracking.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon-wrap"><span class="service-icon-ring"></span><Icon name="lucide:workflow" class="service-icon" /></div>
-          <h3 class="service-card-title">Funnel Creation</h3>
-          <p class="service-card-text">Depending on your offer and the goal you wanna achieve, I'll create the suitable funnel for your offer from the moment they click the ads to the part where they become your buyers.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon-wrap"><span class="service-icon-ring"></span><Icon name="lucide:search-check" class="service-icon" /></div>
-          <h3 class="service-card-title">Copy Audit</h3>
-          <p class="service-card-text">I'll audit your copies and funnels and provide you feedbacks on what could be done better and which are to improve (and by audit I mean my own audit, not AI).</p>
+          <div class="service-card-body">
+            <h3 class="service-card-title">Conversion Assets</h3>
+            <p class="service-card-text">These are the web pages where I send cold prospects to convert them into subscribers or paying customers like landing pages, sales pages, lead magnets, tripwire pages, VSL landing pages.</p>
+          </div>
         </div>
         <div class="service-card">
           <div class="service-icon-wrap"><span class="service-icon-ring"></span><Icon name="lucide:mail" class="service-icon" /></div>
-          <h3 class="service-card-title">Email Marketing</h3>
-          <p class="service-card-text">I'll set up your CRM system (in case you haven't set one already) and write your email campaigns while making sure they don't end up in the spam folders.</p>
+          <div class="service-card-body">
+            <h3 class="service-card-title">Nurturing Campaigns</h3>
+            <p class="service-card-text">This is done by collecting a list of cold subscribers and followers, then nurturing them through email marketing or social media content to build their trust and turn them into buying customers.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap"><span class="service-icon-ring"></span><Icon name="lucide:presentation" class="service-icon" /></div>
+          <div class="service-card-body">
+            <h3 class="service-card-title">Webinar Events</h3>
+            <p class="service-card-text">This is one of the best funnel strategies to earn trust in front of cold strangers and convert them into paid leads. It's done by building a presentation framework that connects the offer to the target avatar's pain points and desires.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap"><span class="service-icon-ring"></span><Icon name="lucide:search" class="service-icon" /></div>
+          <div class="service-card-body">
+            <h3 class="service-card-title">Visibility &amp; AI Recognition</h3>
+            <p class="service-card-text">More people now search through AI instead of browsing the internet directly, which means SEO ranking alone is no longer enough. GEO (generative engine optimization) is now required so AI can find my pages and understand who I am, who I help, and how.</p>
+          </div>
         </div>
       </div>
       </div><!-- end carousel-track-wrap -->
@@ -262,13 +284,9 @@ import Torch from "../components/Torch.astro";
   <!-- ─── CTA ──────────────────────────────────────────────────── -->
   <section id="contact" class="cta-section">
     <div class="cta-inner">
-      <h2 class="cta-heading">Do you wish to hand the fate of your business to generic AI writing?</h2>
-      <h2 class="cta-heading mt-8">Or do you wish to gain the trust and attention of your ideal customers?</h2>
+      <h2 class="cta-heading">Let's discuss how we can build your own conversion system to increase sales and save you time</h2>
+      <a href="https://calendly.com/greenraven1000/business-call" target="_blank" rel="noopener" class="cta-btn">Let's work together</a>
     </div>
-    <a href="https://calendly.com/greenraven1000/business-call" target="_blank" rel="noopener" class="portal-wrap" aria-label="Let's work together">
-      <canvas id="portal-canvas"></canvas>
-      <span class="portal-label">Enter the portal to work together</span>
-    </a>
   </section>
 
   <!-- ─── FOOTER ────────────────────────────────────────────────── -->
@@ -296,6 +314,22 @@ import Torch from "../components/Torch.astro";
   </footer>
 
 <script>
+  const scrollPrompt = document.getElementById('scroll-prompt')!;
+  const scrollWrapEl = document.querySelector('.parallax-wrap') as HTMLElement;
+  const promptTimer = setTimeout(() => {
+    scrollPrompt.classList.add('scroll-prompt-visible');
+  }, 3000);
+  function hidePrompt() {
+    clearTimeout(promptTimer);
+    scrollPrompt.classList.remove('scroll-prompt-visible');
+    scrollWrapEl.removeEventListener('scroll', hidePrompt);
+    window.removeEventListener('wheel', hidePrompt);
+    window.removeEventListener('touchmove', hidePrompt);
+  }
+  scrollWrapEl.addEventListener('scroll', hidePrompt, { once: true });
+  window.addEventListener('wheel', hidePrompt, { once: true });
+  window.addEventListener('touchmove', hidePrompt, { once: true });
+
   const starsContainer = document.getElementById('stars-container')!;
 
   function spawnStar() {
@@ -495,66 +529,22 @@ import Torch from "../components/Torch.astro";
   });
 </script>
 
+
 <script>
   (function () {
-    const canvas = document.getElementById('portal-canvas') as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d')!;
-    const SIZE = 500;
-    canvas.width = SIZE;
-    canvas.height = SIZE;
+    const section = document.getElementById('who') as HTMLElement;
+    const sigil   = document.getElementById('who-sigil') as HTMLImageElement;
+    if (!section || !sigil) return;
 
-    const TWO_PI = Math.PI * 2;
-    const max = 100;
-    let hue = 110;
-    const particles: Particle[] = [];
-
-    function rnd(min: number, max?: number) {
-      if (max === undefined) { max = min; min = 0; }
-      return Math.random() * (max - min) + min;
-    }
-
-    class Particle {
-      r = 0; x = 0; y = 0; vx = 0; vy = 0;
-      color = ''; life = 0; maxLife = 0;
-      init() {
-        this.r = rnd(200) + 100;
-        this.x = SIZE / 2;
-        this.y = SIZE / 2;
-        this.vx = rnd(-2, 2);
-        this.vy = rnd(-2, 2);
-        this.color = `hsla(${hue}, 100%, 50%, .02)`;
-        this.life = 0;
-        this.maxLife = rnd(100);
+    const scrollWrap = document.querySelector('.parallax-wrap') as HTMLElement;
+    const obs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        sigil.classList.add('who-sigil-lit');
+        obs.disconnect();
       }
-      draw() {
-        ctx.strokeStyle = this.color;
-        ctx.beginPath();
-        ctx.globalCompositeOperation = 'lighter';
-        ctx.arc(this.x, this.y, this.r, 0, TWO_PI);
-        ctx.stroke();
-        this.x += this.vx;
-        this.y += this.vy;
-        this.life++;
-        if (this.life >= this.maxLife || this.r <= 0.2) this.init();
-      }
-    }
+    }, { root: scrollWrap, threshold: 0.3 });
 
-    for (let i = 0; i < max; i++) {
-      setTimeout(() => {
-        const p = new Particle();
-        p.init();
-        particles.push(p);
-      }, i * 5);
-    }
-
-    function loop() {
-      ctx.fillStyle = 'rgba(0,0,0,.05)';
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.fillRect(0, 0, SIZE, SIZE);
-      for (const p of particles) p.draw();
-      requestAnimationFrame(loop);
-    }
-    loop();
+    obs.observe(section);
   })();
 </script>
 
