@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://www.humblegreenraven.com',
   devToolbar: { enabled: false },
   integrations: [icon()],
   vite: {

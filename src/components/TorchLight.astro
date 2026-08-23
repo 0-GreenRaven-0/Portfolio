@@ -1,0 +1,31 @@
+---
+/**
+ * TorchLight — the wooden torch with the Lottie flame burning on its head.
+ *
+ * The torch is a transparent webp (public/torch.webp, 108x900) and the flame is
+ * the vector animation from public/fireball.json, positioned over the cloth head.
+ *
+ * Usage:
+ *   <TorchLight />
+ *   <TorchLight width="42px" class="absolute left-0 top-8" />
+ */
+import Fireball from './Fireball.astro';
+
+interface Props {
+  /** Width of the torch shaft. The flame scales from this. */
+  width?: string;
+  /** Extra classes for positioning. */
+  class?: string;
+}
+
+const { width = '34px', class: className = '' } = Astro.props;
+---
+
+<div
+  class:list={['torch-light', className]}
+  style={`--torch-w:${width}`}
+  aria-hidden="true"
+>
+  <Fireball size="calc(var(--torch-w) * 7.8)" class="torch-flame" />
+  <img src="/torch.webp" alt="" width="108" height="900" loading="lazy" decoding="async" />
+</div>

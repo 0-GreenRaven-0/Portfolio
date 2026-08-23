@@ -158,15 +158,22 @@ html {
   @apply h-screen overflow-x-hidden overflow-y-auto;
   perspective: 1px;
   perspective-origin: center top;
-  background: black;
+  background: #16281B;
   scroll-behavior: smooth;
 }
 
 @utility site-bg {
   @apply absolute top-0 left-0 w-full pointer-events-none bg-no-repeat
-    bg-[url('https://ik.imagekit.io/greenraven/Green%20Raven/joe-mania-QwDGUxlInGY-unsplash.webp')]
-    bg-cover bg-[20%_top];
-  height: 270%;
+    bg-[url('/aurora-bg.webp')];
+  /* Oversize to 132% of the layer and anchor to the bottom, which crops exactly
+     the top 24% of the image: that part is empty starfield, and skipping it puts
+     the aurora on screen sooner. Raise the 132% to start further down. */
+  background-size: auto 100%;
+
+background-position: 20% -450px;
+  /* the layer parallaxes at half scroll speed, so it needs about
+     viewport + pageScroll/2 of height to reach the end of the page */
+  height: 400%;
   transform: translateZ(-1px) scale(2);
   transform-origin: center top;
   z-index: 0;
@@ -178,8 +185,7 @@ html {
   }
 
   .parallax-wrap {
-    perspective: none !important;
-    position: relative;
+    perspective: 1px;
     width: 100vw;
     overflow-x: clip !important;
     scrollbar-width: none;
@@ -193,21 +199,14 @@ html {
     width: 100%;
     overflow-x: hidden;
   }
+
   .site-bg {
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    height: 100vh !important;
-    background-size: 180% !important;
-  }
-  .site-content {
-    transform: none !important;
-    z-index: auto !important;
+    background-size: auto 100% !important;
+    background-position: center -250px !important;
   }
 
   .hero-title {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   .hero-section {
@@ -217,8 +216,8 @@ html {
   }
 
   .hero-subheadline {
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+    letter-spacing: 0;
   }
 
   @keyframes shooting {
@@ -273,6 +272,10 @@ html {
 
 @utility section-subtext {
   @apply font-cormorant text-cream/55 text-xl lg:text-2xl leading-relaxed mb-16 max-w-2xl ml-10;
+}
+
+@utility services-subheadline {
+  @apply font-fell text-cream text-sm md:text-xl lg:text-2xl leading-relaxed mb-16 text-center;
 }
 
 @utility section-indent {
@@ -426,8 +429,16 @@ html {
   @apply font-fell text-gold text-xs tracking-[0.4em] uppercase mb-8 block;
 }
 
+@utility hero-subtitle {
+  @apply font-fell text-cream text-sm md:text-lg lg:text-2xl mb-4 block;
+  text-shadow:
+    0 0 10px rgba(0, 255, 135, 0.6),
+    0 0 25px rgba(57, 255, 20, 0.4),
+    0 0 50px rgba(0, 255, 135, 0.2);
+}
+
 @utility hero-title {
-  @apply font-fell text-cream text-3xl md:text-5xl lg:text-8xl leading-tight tracking-tight mb-4 max-w-5xl;
+  @apply font-fell text-cream text-2xl md:text-4xl lg:text-7xl leading-tight tracking-tight mb-4 max-w-5xl;
   text-shadow:
     0 0 10px rgba(0, 255, 135, 0.6),
     0 0 25px rgba(57, 255, 20, 0.4),
@@ -480,14 +491,24 @@ html {
 }
 
 @utility hero-subheadline {
-  @apply font-inter text-cream text-[0.6rem] md:text-xs tracking-[0.15em] md:tracking-[0.2em] max-w-2xl leading-loose mb-1 uppercase;
+  @apply font-fell text-cream/80 text-base md:text-xl lg:text-2xl max-w-3xl leading-snug mt-4;
 }
 
 /* ─── WHO SECTION ────────────────────────────────────────────── */
 
 @utility who-section {
   position: relative;
-  padding: clamp(5rem, 8vh, 7rem) clamp(2rem, 5vw, 5rem) clamp(3rem, 6vh, 5rem);
+  /* top padding drops the heading below the ornaments leaves, which are widest
+     at the top and narrow to a thin vine further down */
+  padding: clamp(8rem, 13vh, 11rem) clamp(3rem, 7vw, 7rem) clamp(5rem, 9vh, 8rem);
+}
+
+@utility who-torch-mobile-wrap {
+  display: none;
+}
+
+@utility who-heading-row {
+  display: block;
 }
 
 @utility who-wall-bg {
@@ -498,60 +519,24 @@ html {
     linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
     url('/brick wall.jpg');
   background-size: 300px;
-  clip-path: polygon(
-    /* bottom-left corner */
-    0 100%, 0 97%,
-    /* bottom edge — jagged notches (L→R) */
-    5%  97%,  5%  100%,
-    12% 100%, 12% 98%,
-    20% 98%,  20% 100%,
-    29% 100%, 29% 96%,
-    37% 96%,  37% 100%,
-    46% 100%, 46% 98%,
-    54% 98%,  54% 100%,
-    63% 100%, 63% 97%,
-    71% 97%,  71% 100%,
-    80% 100%, 80% 98%,
-    87% 98%,  87% 100%,
-    93% 100%, 93% 98%,
-    /* right edge — shallow vertical notches (1–4% deep) */
-    93% 92%, 91% 92%,
-    91% 84%, 93% 84%,
-    93% 75%, 92% 75%,
-    92% 67%, 93% 67%,
-    93% 59%, 90% 59%,
-    90% 51%, 93% 51%,
-    93% 43%, 91% 43%,
-    91% 35%, 93% 35%,
-    93% 27%, 89% 27%,
-    89% 19%, 93% 19%,
-    93% 12%, 92% 12%,
-    92% 5%,  93% 5%,
-    93% 0,
-    /* top jagged edge, right→left */
-    91% 0,  91% 2%,
-    87% 2%, 87% 0,
-    85% 0,  85% 2%,
-    77% 2%, 77% 0,
-    67% 0,  67% 1%,
-    59% 1%, 59% 4%,
-    51% 4%, 51% 2%,
-    43% 2%, 43% 0,
-    35% 0,  35% 1%,
-    27% 1%, 27% 3%,
-    19% 3%, 19% 0,
-    11% 0,  11% 2%,
-    4%  2%, 4%  4%,
-    /* left edge */
-    0 4%
-  );
+  mask-image: url('/wall-mask-traced.svg');
+  -webkit-mask-image: url('/wall-mask-traced.svg');
+  /* Oversized and right-aligned so the reference image's ragged LEFT edge spills
+     off-screen, leaving a clean straight left cut while top, right and bottom keep
+     their eroded edges. */
+  mask-size: 114% 100%;
+  -webkit-mask-size: 114% 100%;
+  mask-position: right top;
+  -webkit-mask-position: right top;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
 }
 
 @utility who-rune-tl {
   position: absolute;
-  top: 0;
+  top: clamp(1rem, 2.4vw, 2.5rem);
   left: 0;
-  width: clamp(100px, 14vw, 180px);
+  width: clamp(140px, 19vw, 250px);
   opacity: 0.9;
   z-index: 2;
   pointer-events: none;
@@ -571,27 +556,8 @@ html {
   grid-template-rows: 1fr 1fr;
   gap: clamp(1.5rem, 3vw, 2.5rem);
   min-height: clamp(320px, 50vh, 500px);
-  padding: 0 clamp(1rem, 3vw, 3rem);
+  padding: 0 clamp(1.5rem, 5vw, 5rem) 0 clamp(1rem, 3vw, 3rem);
   max-width: 88%;
-}
-
-@utility who-sigil {
-  width: clamp(60px, 8vw, 110px);
-  height: clamp(60px, 8vw, 110px);
-  object-fit: contain;
-  opacity: 0.15;
-  transform: rotate(-18deg);
-  filter: grayscale(100%) brightness(1.4);
-  align-self: end;
-  justify-self: start;
-  transition: opacity 1.1s ease, filter 1.1s ease;
-}
-
-@utility who-sigil-lit {
-  opacity: 0.75;
-  filter: grayscale(0%) brightness(1.1)
-    drop-shadow(0 0 8px rgba(42,174,5,0.9))
-    drop-shadow(0 0 28px rgba(42,174,5,0.5));
 }
 
 @utility who-cell-a {
@@ -604,7 +570,7 @@ html {
   @apply font-fell text-cream leading-relaxed text-left;
   font-size: clamp(1rem, 1.8vw, 1.35rem);
   align-self: end;
-  grid-column: 2;
+  grid-column: 1 / -1;
   grid-row: 2;
 }
 
@@ -618,7 +584,7 @@ html {
 
 @media (max-width: 767px) {
   .services-section {
-    margin-top: -2rem;
+    margin-top: 3rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
@@ -628,8 +594,10 @@ html {
   }
   .service-card {
     background:
-      linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+      linear-gradient(rgba(0,0,0,0.48), rgba(0,0,0,0.48)),
       url('/brick wall.jpg') center / 150px repeat;
+    mask-image: url('/stone-mask-traced.svg');
+    -webkit-mask-image: url('/stone-mask-traced.svg');
   }
 }
 
@@ -654,28 +622,50 @@ html {
 
   /* Who section — full-width, single column */
   .who-section {
-    padding: 5rem 0 6rem;
-  }
-  .who-wall-bg {
-    clip-path: none;
+    padding: 3rem 1.5rem 4rem 1.5rem;
   }
   .who-rune-tl {
-    width: 160px;
+    display: none;
+  }
+  .who-heading-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+  }
+  .who-torch-mobile-wrap {
+    display: block;
+    position: relative;
+    flex-shrink: 0;
+    width: 20px;
+    height: 100px;
+  }
+  .who-torch-mobile {
+    left: 0.5rem;
+    right: auto;
+    top: 1rem;
+  }
+  .who-torch {
+    display: none;
   }
   .who-heading {
     font-size: 1.6rem;
-    padding-left: 1rem;
-    margin-bottom: 1rem;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: left;
+    flex: none;
+    max-width: 72%;
   }
   .who-grid {
     grid-template-columns: 1fr;
     max-width: 100%;
     min-height: auto;
     gap: 1.25rem;
-    padding: 0 1rem;
+    padding: 0;
   }
   .who-grid > span { display: none; }
-  .who-sigil { display: none; }
   .who-cell-b {
     grid-column: 1 !important;
     grid-row: auto !important;
@@ -688,42 +678,22 @@ html {
     margin-top: 0;
   }
 
-  /* Service cards — vertical full-width on mobile */
+  .services-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 1.5rem;
+  }
   .service-card {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 1.25rem 1rem;
+    width: 280px;
+    min-height: 320px;
+    padding: 3rem 2.5rem 3.5rem;
     gap: 0.75rem;
   }
-  .service-card-body {
-    align-items: center;
-  }
   .service-card-title {
-    text-align: center;
+    font-size: 0.9rem;
   }
   .service-card-text {
-    text-align: left;
-  }
-  .service-icon-wrap {
-    width: 3.5rem;
-    height: 3.5rem;
-    flex-shrink: 0;
-  }
-  .service-icon {
-    width: 1.75rem;
-    height: 1.75rem;
-  }
-  .services-section {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .services-container {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .services-grid {
-    padding: 0 0.75rem;
+    font-size: 0.75rem;
   }
 
   /* Portfolio — reduce excessive top padding */
@@ -733,7 +703,8 @@ html {
 }
 
 @utility services-container {
-  @apply max-w-5xl mx-auto text-center;
+  @apply w-full text-center;
+  padding: 0 1.5rem;
 }
 
 @utility toggle-bar {
@@ -759,28 +730,29 @@ html {
 }
 
 @utility services-grid {
-  @apply grid grid-cols-1 gap-8 mt-12;
+  display: grid;
+  grid-template-columns: repeat(3, 280px);
+  justify-content: center;
+  gap: 3.5rem 2.5rem;
+  margin-top: 3rem;
 }
 
 @utility service-card {
-  @apply relative flex flex-row items-center text-left py-6 px-8 gap-8 rounded-2xl overflow-hidden;
-  background: url('/brick wall.jpg') center / 300px repeat;
-  border: none;
+  @apply relative flex flex-col items-center text-center gap-4;
+  width: 280px;
+  min-height: 420px;
+  padding: 3.5rem 2.5rem 4rem;
+  justify-content: flex-start;
+  background:
+    linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.52)),
+    url('/brick wall.jpg') center / 300px repeat;
+  mask-image: url('/stone-mask-traced.svg');
+  -webkit-mask-image: url('/stone-mask-traced.svg');
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+  mask-position: center;
+  -webkit-mask-position: center;
   animation: float 3.5s ease-in-out infinite;
-  transition: opacity 0.25s ease;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.45);
-    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 200' preserveAspectRatio='none'%3E%3Crect width='800' height='200' fill='white'/%3E%3Cpolyline points='5,5 24,20 40,16' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='24,20 20,38' fill='none' stroke='black' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpolyline points='150,0 148,18 158,32' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='148,18 136,26' fill='none' stroke='black' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpolyline points='400,0 402,20 394,36' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='650,0 648,16 657,30 648,44' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='795,5 774,20 778,36' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='0,65 20,63 36,69' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='0,135 24,133 40,138 54,134' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='800,80 778,78 762,83' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='800,148 776,150 760,145' fill='none' stroke='black' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpolyline points='200,200 202,182 193,166' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='193,166 183,156' fill='none' stroke='black' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpolyline points='560,200 558,180 567,163' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='795,195 774,178 778,162' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E");
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 200' preserveAspectRatio='none'%3E%3Crect width='800' height='200' fill='white'/%3E%3Cpolyline points='5,5 24,20 40,16' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='24,20 20,38' fill='none' stroke='black' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpolyline points='150,0 148,18 158,32' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='148,18 136,26' fill='none' stroke='black' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpolyline points='400,0 402,20 394,36' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='650,0 648,16 657,30 648,44' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='795,5 774,20 778,36' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='0,65 20,63 36,69' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='0,135 24,133 40,138 54,134' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='800,80 778,78 762,83' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='800,148 776,150 760,145' fill='none' stroke='black' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpolyline points='200,200 202,182 193,166' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='193,166 183,156' fill='none' stroke='black' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpolyline points='560,200 558,180 567,163' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3Cpolyline points='795,195 774,178 778,162' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E");
-    mask-size: 100% 100%;
-    -webkit-mask-size: 100% 100%;
-    pointer-events: none;
-    z-index: 0;
-  }
 }
 
 .service-card:nth-child(1) { animation-delay: 0s; }
@@ -845,11 +817,10 @@ html {
 }
 
 @utility service-icon {
-  @apply w-9 h-9 text-fern relative z-10;
+  @apply w-10 h-10 text-fern relative z-10 flex-shrink-0;
 }
 
 @utility service-card-body {
-  flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -858,6 +829,9 @@ html {
 
 @utility service-card-title {
   @apply font-fell text-cream text-lg tracking-widest uppercase relative z-10;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  word-break: break-word;
+  hyphens: auto;
 }
 
 @utility service-card-text {
@@ -871,6 +845,11 @@ html {
 @utility portfolio-section {
   @apply relative py-32 px-6 overflow-hidden bg-repeat bg-center bg-[length:300px];
   background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/brick wall.jpg');
+  /* Forces GPU compositing layer so mobile browsers don't drop the clip-path
+     when child overlay changes display */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: clip-path;
   padding-top: 10rem;
   clip-path: polygon(
     /* broken top edge */
@@ -1355,6 +1334,7 @@ html {
     padding: 0.65rem 1.5rem;
     margin-top: 1.25rem;
     letter-spacing: 0.15em;
+    transform: rotate(-1.5deg);
   }
 }
 
@@ -1371,35 +1351,63 @@ html {
 }
 
 @utility cta-btn {
-  @apply inline-block font-fell text-lg tracking-widest uppercase px-10 py-4 mt-10;
+  @apply inline-block font-fell text-5xl tracking-widest uppercase px-14 py-6 mt-10;
   position: relative;
-  overflow: hidden;
   color: #ffffff;
-  background: linear-gradient(135deg, rgba(20, 60, 10, 0.55) 0%, rgba(10, 35, 5, 0.7) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(42, 174, 5, 0.35);
-  border-radius: 6px;
+  background: transparent;
+  border: none;
   text-decoration: none;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(42, 174, 5, 0.2);
-  transition: border-color 0.3s ease;
+  transform: rotate(-1.5deg);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.18) 50%, transparent 80%);
-    transition: left 0.5s ease;
-    pointer-events: none;
-  }
-  &:hover::after {
-    left: 160%;
-  }
   &:hover {
-    border-color: rgba(42, 174, 5, 0.65);
+    color: #4ade80;
+    text-shadow:
+      0 0 8px rgba(42, 174, 5, 0.9),
+      0 0 20px rgba(42, 174, 5, 0.6),
+      0 0 40px rgba(42, 174, 5, 0.3);
+  }
+}
+
+@keyframes nudge-right {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
+
+@keyframes nudge-left {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-8px); }
+}
+
+@utility cta-btn-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+@utility cta-arrow {
+  color: #2AAE05;
+  display: flex;
+  align-items: center;
+  opacity: 0.85;
+}
+
+@utility cta-arrow-left {
+  animation: nudge-right 1.2s ease-in-out infinite;
+}
+
+@utility cta-arrow-right {
+  animation: nudge-left 1.2s ease-in-out infinite;
+}
+
+.cta-arrow svg {
+  width: 28px;
+  height: auto;
+}
+
+@media (max-width: 767px) {
+  .cta-arrow svg {
+    width: 48px;
   }
 }
 
@@ -1539,92 +1547,96 @@ html {
   .rock-group { display: none; }
 }
 
-/* ─── TORCH ───────────────────────────────────────────────────── */
+/* ─── TORCH ──────────────────────────────────────────────────── */
 
-@keyframes fire-rise {
-  from   { opacity: 0; transform: translateY(0) scale(1); }
-  25%    { opacity: 1; }
-  to     { opacity: 0; transform: translateY(-10em) scale(0); }
-}
-
-.torch-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  pointer-events: none;
-}
-
-.fire-particles {
-  font-size: 12px;
-  filter: blur(0.03em);
-  position: relative;
-  width: 80px;
-  height: 12em;
-}
-
-.fire-particle {
-  animation: fire-rise 1s ease-in infinite;
-  background-image: radial-gradient(rgb(42, 174, 5) 20%, rgba(42, 174, 5, 0) 70%);
-  border-radius: 50%;
-  mix-blend-mode: screen;
-  opacity: 0;
+/* Torches are decoration: always out of the document flow, so adding or moving
+   one never reflows the text it sits beside. */
+@utility torch-light {
   position: absolute;
-  bottom: 0;
-  width: 2.5em;
-  height: 2.5em;
+  width: var(--torch-w, 34px);
+  pointer-events: none;
+  user-select: none;
+  z-index: 12;
 }
 
-.torch-head {
-  width: 10px;
-  height: 14px;
-  background: linear-gradient(to bottom, #2a1a08, #0f0800);
-  border-radius: 2px 2px 1px 1px;
-}
-
-.torch-stick {
-  width: 5px;
-  height: 44px;
-  background: linear-gradient(to right, #3b2210, #1e0f04, #3b2210);
-  border-radius: 2px 2px 3px 3px;
-}
-
-/* ─── PORTAL ─────────────────────────────────────────────────── */
-
-@utility portal-wrap {
-  position: relative;
+.torch-light img {
   display: block;
-  width: min(480px, 88vw);
-  height: min(480px, 88vw);
-  margin: 2rem auto 0;
-  cursor: pointer;
-  text-decoration: none;
-  transition: filter 0.4s ease;
-  &:hover {
-    filter: drop-shadow(0 0 32px rgba(42, 174, 5, 0.5));
+  width: 75%;
+  height: auto;
+  margin: 0.2rem auto 0;
+  filter: brightness(0.55) drop-shadow(0 0 12px rgba(42, 174, 5, 0.20));
+}
+
+/* The cloth head is the top ~23% of the art, so its centre sits at ~11.5%.
+   The flame art is centred at about 53% of its own box, so translating by that
+   lands the fire exactly on the cloth rather than floating above the torch. */
+.torch-light .torch-flame {
+  position: absolute;
+  left: 50%;
+  top: -3%;
+  transform: translate(-50%, -53%);
+  z-index: 2;
+}
+
+/* Light thrown onto the wall behind the head. */
+.torch-light::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 11.5%;
+  width: calc(var(--torch-w) * 14);
+  height: calc(var(--torch-w) * 14);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle,
+    rgba(80, 220, 20, 0.55) 0%,
+    rgba(42, 174, 5, 0.30) 28%,
+    rgba(42, 174, 5, 0.10) 52%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Placement: "who is this for" ── */
+@utility who-cell-a-row {
+  position: relative;
+  align-self: start;
+}
+
+/* Sits well out in the open wall to the RIGHT of the paragraph. */
+.who-torch {
+  left: calc(100% + clamp(3rem, 13vw, 15rem));
+  top: 3rem;
+}
+
+/* ── Placement: about photo frames ──
+   The frame classes are named for where the TEXT goes, not the frame:
+   .about-frame-right puts the frame on the LEFT (left:10%), and vice versa.
+   So the torch goes on the frame's opposite side, as asked. */
+.about-torch {
+  top: -6%;
+}
+
+.about-torch-right {            /* frame on the left, torch to its right */
+  left: calc(10% + 14rem + 5rem);
+}
+
+.about-torch-left {             /* frame on the right, torch to its left */
+  right: calc(10% + 14rem + 5rem);
+}
+
+@media (min-width: 1024px) {
+  .about-torch-right { left: calc(10% + 18rem + 6.5rem); }
+  .about-torch-left  { right: calc(10% + 18rem + 6.5rem); }
+}
+
+@media (max-width: 767px) {
+  .who-torch { --torch-w: 26px !important; }
+  .about-torch {
+    --torch-w: 12px !important;
+    top: -22%;
   }
-}
-
-#portal-canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-@utility portal-label {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 12%;
-  font-family: var(--font-fell);
-  font-style: italic;
-  color: #fff;
-  font-size: clamp(0.9rem, 2.5vw, 1.3rem);
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.95), 0 0 40px rgba(42, 174, 5, 0.6);
-  pointer-events: none;
-  letter-spacing: 0.05em;
-  text-align: center;
+  .about-torch-right { left: calc(5% + 10rem + 3rem); }
+  .about-torch-left  { right: calc(5% + 10rem + 3rem); }
 }
 
 /* ─── FOOTER ─────────────────────────────────────────────────── */

@@ -1,23 +1,91 @@
 ---
-interface Props { title?: string; }
-const { title = "Matthew Hamdesh — Copywriter & Funnel Strategist" } = Astro.props;
+interface Props { title?: string; description?: string; }
+const {
+  title = "Your copywriter & conversion strategist",
+  description = "Matthew Hamdesh is a copywriter & conversion strategist for coaches. He builds full-stack conversion systems — ad scripts, landing pages, email sequences — so you attract paying students who trust you, not just words on a screen."
+} = Astro.props;
+
+const siteUrl = "https://www.humblegreenraven.com";
+const ogImage = `${siteUrl}/og-image.jpg`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      "name": "Matthew Hamdesh",
+      "jobTitle": "Copywriter & Conversion Strategist",
+      "description": description,
+      "url": siteUrl,
+      "sameAs": [
+        "https://instagram.com/mattywriting",
+        "https://www.linkedin.com/in/matthew-hamdesh-a98584378"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      "url": siteUrl,
+      "name": title,
+      "description": description,
+      "publisher": { "@id": `${siteUrl}/#person` }
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/`,
+      "url": siteUrl,
+      "name": title,
+      "description": description,
+      "isPartOf": { "@id": `${siteUrl}/#website` },
+      "about": { "@id": `${siteUrl}/#person` },
+      "inLanguage": "en"
+    }
+  ]
+};
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="https://ik.imagekit.io/greenraven/Green%20Raven/Green%20Raven.png?updatedAt=1766511556233" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={siteUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Humble Green Raven" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://ik.imagekit.io/greenraven/Green%20Raven/Green%20Raven.png?updatedAt=1766511556233" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=IM+Fell+English:ital@0;1&family=Inter:wght@300..700&display=swap" rel="stylesheet" />
-    <title>{title}</title>
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="site-body">
+    <div id="page-fade" style="position:fixed;inset:0;background:#000;z-index:99999;pointer-events:none;"></div>
     <div class="parallax-wrap">
       <div class="site-bg"></div>
 <div class="site-content">
@@ -25,4 +93,21 @@ const { title = "Matthew Hamdesh — Copywriter & Funnel Strategist" } = Astro.p
       </div>
     </div>
   </body>
+
+  <style>
+    @keyframes page-reveal {
+      from { opacity: 1; }
+      to   { opacity: 0; }
+    }
+    #page-fade {
+      animation: page-reveal 1.8s ease 0.1s forwards;
+    }
+  </style>
+
+  <script>
+    history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+    const wrap = document.querySelector('.parallax-wrap') as HTMLElement | null;
+    if (wrap) wrap.scrollTop = 0;
+  </script>
 </html>

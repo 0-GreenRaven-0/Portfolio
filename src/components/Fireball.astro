@@ -1,0 +1,75 @@
+---
+/**
+ * Fireball — a looping ball of green fire, rendered from public/fireball.json by lottie-web.
+ *
+ * Vector, transparent, about 240 KB of JSON, and no video file. Regenerate the
+ * animation with `node tools/make-fireball-lottie.mjs` after editing its CONFIG block.
+ *
+ * Usage:
+ *   <Fireball size="120px" />
+ *   <Fireball size="4rem" class="absolute top-10 left-1/2" />
+ */
+interface Props {
+  /** Rendered width and height. Any CSS length. */
+  size?: string;
+  /** Extra classes for positioning. */
+  class?: string;
+  /** Pause while off screen. Leave on unless you need it always running. */
+  lazy?: boolean;
+}
+
+const { size = '160px', class: className = '', lazy = true } = Astro.props;
+---
+
+<div
+  class:list={['fireball pointer-events-none select-none', className]}
+  style={`width:${size};height:${size}`}
+  data-lazy={lazy ? 'true' : 'false'}
+  aria-hidden="true"
+>
+</div>
+
+<script>
+  import lottie from 'lottie-web';
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLElement>('.fireball').forEach((el) => {
+    if (el.dataset.mounted === 'true') return;
+    el.dataset.mounted = 'true';
+
+    const anim = lottie.loadAnimation({
+      container: el,
+      renderer: 'svg',
+      loop: true,
+      autoplay: !reduce,
+      path: '/fireball.json',
+    });
+
+    // Reduced motion gets a still frame of the fire rather than no fire at all.
+    if (reduce) {
+      anim.addEventListener('DOMLoaded', () => anim.goToAndStop(20, true));
+      return;
+    }
+
+    // Off-screen fireballs stop costing frames.
+    if (el.dataset.lazy === 'true' && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) anim.play();
+            else anim.pause();
+          });
+        },
+        { threshold: 0 }
+      );
+      io.observe(el);
+    }
+
+    // And so does a hidden tab.
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) anim.pause();
+      else if (!el.dataset.offscreen) anim.play();
+    });
+  });
+</script>
