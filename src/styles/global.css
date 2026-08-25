@@ -603,17 +603,17 @@ background-position: 20% -450px;
 
 @media (max-width: 767px) {
   .portfolio-grid {
-    grid-template-columns: repeat(2, 130px);
+    grid-template-columns: repeat(2, 155px);
     gap: 1.5rem;
   }
   .portfolio-card,
   .portfolio-card-frame,
   .portfolio-card-img {
-    width: 130px;
+    width: 155px;
   }
   .portfolio-card-frame,
   .portfolio-card-img {
-    height: 195px;
+    height: 232px;
   }
   .portfolio-card-icon {
     width: 2rem;
@@ -684,7 +684,7 @@ background-position: 20% -450px;
     gap: 1.5rem;
   }
   .service-card {
-    width: 280px;
+    width: 300px;
     min-height: 320px;
     padding: 3rem 2.5rem 3.5rem;
     gap: 0.75rem;
@@ -731,7 +731,8 @@ background-position: 20% -450px;
 
 @utility services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 280px);
+  grid-template-columns: repeat(2, 360px);
+  grid-template-rows: repeat(2, auto);
   justify-content: center;
   gap: 3.5rem 2.5rem;
   margin-top: 3rem;
@@ -739,8 +740,7 @@ background-position: 20% -450px;
 
 @utility service-card {
   @apply relative flex flex-col items-center text-center gap-4;
-  width: 280px;
-  min-height: 420px;
+  width: 360px;
   padding: 3.5rem 2.5rem 4rem;
   justify-content: flex-start;
   background:
@@ -757,10 +757,8 @@ background-position: 20% -450px;
 
 .service-card:nth-child(1) { animation-delay: 0s; }
 .service-card:nth-child(2) { animation-delay: 0.5s; }
-.service-card:nth-child(3) { animation-delay: 1.1s; }
+.service-card:nth-child(3) { animation-delay: 1.0s; }
 .service-card:nth-child(4) { animation-delay: 0.3s; }
-.service-card:nth-child(5) { animation-delay: 0.8s; }
-.service-card:nth-child(6) { animation-delay: 1.5s; }
 
 @utility card-diamond {
   @apply absolute w-5 h-5;
@@ -881,29 +879,29 @@ background-position: 20% -450px;
 
 @utility portfolio-grid {
   @apply grid gap-8;
-  grid-template-columns: repeat(auto-fill, 175px);
+  grid-template-columns: repeat(auto-fill, 220px);
   justify-content: center;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 @utility portfolio-card {
   @apply flex flex-col items-center text-center no-underline cursor-pointer bg-transparent border-none p-0;
-  width: 175px;
+  width: 220px;
   transition: opacity 0.25s ease, transform 0.25s ease;
   &:hover .portfolio-card-shine { animation: shine 0.6s ease forwards; }
 }
 
 @utility portfolio-card-frame {
   @apply relative mb-3;
-  width: 175px;
-  height: 262px;
+  width: 220px;
+  height: 330px;
   transition: transform 0.3s ease;
 }
 
 @utility portfolio-card-img {
   @apply overflow-hidden;
-  width: 175px;
-  height: 262px;
+  width: 220px;
+  height: 330px;
   background: #000000;
   mask-image: url('/window.png');
   mask-size: contain;
@@ -922,27 +920,23 @@ background-position: 20% -450px;
   transition: opacity 0.3s ease 0.2s;
 }
 
-/* Landing Page — blue/teal */
+/* Creative Strategies — blue/teal */
 .portfolio-card:nth-child(1) .portfolio-card-glass {
   background: url('/patterns.jpg') center / 120% no-repeat, linear-gradient(145deg, #7ec8e3 0%, #0077b6 25%, #005f8a 50%, #7ec8e3 80%, #0077b6 100%);
 }
 
-/* Sales Page — gold/amber */
+/* Funnel Strategies — gold/amber */
 .portfolio-card:nth-child(2) .portfolio-card-glass {
   background: url('/patterns.jpg') center / 120% no-repeat, linear-gradient(145deg, #f5d77a 0%, #d4a017 25%, #b8860b 50%, #f5d77a 80%, #d4a017 100%);
 }
 
-/* Email Campaign — green (default) */
+/* Email — green (default) */
 
-/* Instagram — brand palette */
+/* Content Creation — Instagram brand palette */
 .portfolio-card:nth-child(4) .portfolio-card-glass {
   background: url('/patterns.jpg') center / 120% no-repeat, linear-gradient(145deg, #ffdc80 0%, #fcaf45 15%, #f77737 30%, #fd1d1d 45%, #e1306c 60%, #833ab4 80%, #405de6 100%);
 }
 
-/* Webinar Funnel — purple/indigo */
-.portfolio-card:nth-child(5) .portfolio-card-glass {
-  background: url('/patterns.jpg') center / 120% no-repeat, linear-gradient(145deg, #b39ddb 0%, #7c4dff 25%, #5c2d91 50%, #b39ddb 80%, #7c4dff 100%);
-}
 
 @utility portfolio-card-shine {
   @apply absolute top-0 w-1/2 h-full pointer-events-none;
